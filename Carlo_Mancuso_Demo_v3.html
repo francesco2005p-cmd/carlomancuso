@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content="Demo sito Carlo Mancuso — personal training con approccio posturale e funzionale." />
+  <title>Carlo Mancuso — Personal Training & Postura | Demo</title>
+  <style>
+    :root{
+      --paper:#f2f0e8;
+      --paper-2:#e8e4d9;
+      --ink:#111411;
+      --muted:#64685f;
+      --line:rgba(17,20,17,.16);
+      --acid:#f36b2b;
+      --dark:#151a16;
+      --white:#fbfbf7;
+      --radius:22px;
+      --shadow:0 18px 60px rgba(20,24,18,.08);
+      --max:1280px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--paper);
+      color:var(--ink);
+      font-family:Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height:1.45;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+    .wrap{width:min(calc(100% - 40px), var(--max)); margin-inline:auto}
+    .eyebrow{
+      font-size:.76rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:760;
+    }
+    .muted{color:var(--muted)}
+    .pill{
+      display:inline-flex;align-items:center;gap:.55rem;
+      border:1px solid var(--line);border-radius:999px;padding:.52rem .8rem;
+      font-size:.8rem;background:rgba(255,255,255,.35)
+    }
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--acid);box-shadow:0 0 0 4px rgba(243,107,43,.20)}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
+      min-height:48px;padding:.72rem 1.05rem;border-radius:999px;
+      border:1px solid var(--ink);font-weight:730;cursor:pointer;
+      transition:transform .2s ease,background .2s ease,color .2s ease;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--ink);color:var(--white)}
+    .btn-primary .arrow{background:var(--acid);color:var(--ink)}
+    .btn-ghost{background:transparent}
+    .arrow{
+      width:28px;height:28px;display:grid;place-items:center;border-radius:50%;
+      border:1px solid currentColor;font-size:.9rem
+    }
+    .ticker{
+      background:var(--dark);color:var(--white);overflow:hidden;
+      white-space:nowrap;border-bottom:1px solid rgba(255,255,255,.12)
+    }
+    .ticker-track{
+      display:inline-flex;gap:2.4rem;padding:.56rem 0;
+      animation:ticker 28s linear infinite;font-size:.7rem;
+      text-transform:uppercase;letter-spacing:.17em
+    }
+    .ticker-track span::after{content:"✦";margin-left:2.4rem;color:var(--acid)}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    .nav{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(16px);background:rgba(242,240,232,.78);
+      border-bottom:1px solid transparent;transition:border .2s ease
+    }
+    .nav.scrolled{border-color:var(--line)}
+    .nav-in{height:74px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .brand{display:flex;align-items:center;gap:.75rem;font-weight:850;letter-spacing:-.03em}
+    .brand-mark{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--acid);display:grid;place-items:center;font-size:.68rem;letter-spacing:.05em}
+    .nav-links{display:flex;align-items:center;gap:1.5rem;font-size:.88rem}
+    .nav-links a{opacity:.72}.nav-links a:hover{opacity:1}
+    .nav-cta{padding:.55rem .82rem;min-height:40px}
+    .menu{display:none;background:none;border:0;font-size:1.35rem}
+
+    .hero{padding:64px 0 72px}
+    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:4.5rem;align-items:center}
+    h1,h2,h3,p{margin-top:0}
+    h1{
+      font-size:clamp(4rem,8vw,8.2rem);line-height:.86;letter-spacing:-.075em;
+      margin:.9rem 0 1.45rem;font-weight:860;max-width:980px
+    }
+    h1 .line2{display:block;padding-left:8vw}
+    h1 em{font-family:Georgia, "Times New Roman", serif;font-weight:400}
+    .hero-copy{font-size:1.06rem;max-width:620px;color:#3f433d}
+    .hero-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.7rem}
+    .hero-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
+    .hero-meta strong{display:block;font-size:.92rem}.hero-meta span{font-size:.76rem;color:var(--muted)}
+    .scan-card{
+      position:relative;min-height:580px;border-radius:32px;background:var(--dark);
+      overflow:hidden;box-shadow:var(--shadow);isolation:isolate
+    }
+    .scan-card::before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);
+      background-size:52px 52px;mask-image:linear-gradient(to bottom,black,transparent 92%)
+    }
+    .scan-card::after{
+      content:"";position:absolute;width:320px;height:320px;border-radius:50%;
+      background:var(--acid);filter:blur(3px);right:-120px;top:-90px;z-index:-1;
+      opacity:.92
+    }
+    .scan-top{position:absolute;top:24px;left:24px;right:24px;display:flex;justify-content:space-between;color:var(--white);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+    .body-map{position:absolute;inset:85px 30px 95px;display:grid;place-items:center}
+    .body-map svg{width:min(92%,410px);height:auto;overflow:visible}
+    .scan-label{
+      position:absolute;background:rgba(242,240,232,.94);color:var(--ink);border-radius:999px;
+      padding:.48rem .72rem;font-size:.72rem;border:1px solid rgba(255,255,255,.28)
+    }
+    .l1{left:26px;top:39%}.l2{right:22px;top:56%}.l3{left:40px;bottom:120px}
+    .scan-bottom{
+      position:absolute;left:24px;right:24px;bottom:24px;padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.18);color:var(--white);
+      display:flex;justify-content:space-between;align-items:end;gap:1rem
+    }
+    .scan-bottom strong{display:block;font-size:1.25rem;letter-spacing:-.03em}
+    .scan-bottom small{color:rgba(255,255,255,.58)}
+    .photo-slider::before,.photo-slider::after{display:none}
+    .photo-slider .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.025);transition:opacity .85s ease, transform 5s ease}
+    .photo-slider .slide.active{opacity:1;transform:scale(1)}
+    .photo-slider .scan-top,.photo-slider .scan-bottom{z-index:3}
+    .slider-dots{display:flex;gap:.42rem;align-items:center}
+    .slider-dot{width:8px;height:8px;padding:0;border-radius:999px;border:1px solid rgba(255,255,255,.8);background:transparent;cursor:pointer;transition:width .2s ease,background .2s ease}
+    .slider-dot.active{width:24px;background:var(--acid)}
+
+    .rot{writing-mode:vertical-rl;transform:rotate(180deg);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
+    .section{padding:100px 0;border-top:1px solid var(--line)}
+    .section.dark{background:var(--dark);color:var(--white);border:0}
+    .section-head{display:block;margin-bottom:3.2rem}
+    .section h2{
+      font-size:clamp(2.7rem,5.6vw,6rem);line-height:.94;letter-spacing:-.055em;
+      margin:0;font-weight:800
+    }
+    .section h2 em{font-family:Georgia, "Times New Roman", serif;font-weight:400}
+    .lede{font-size:1.14rem;color:var(--muted);max-width:700px;margin-top:1rem}
+    .dark .lede{color:rgba(255,255,255,.62)}
+    .manifesto{
+      display:grid;grid-template-columns:1fr 1fr;gap:1rem
+    }
+    .manifesto-card{
+      min-height:330px;border:1px solid var(--line);border-radius:var(--radius);padding:2rem;
+      display:flex;flex-direction:column;justify-content:space-between;background:rgba(255,255,255,.19)
+    }
+    .manifesto-card.acid{background:var(--acid);border-color:transparent}
+    .manifesto-card > div:last-child{display:flex;flex-direction:column;gap:1rem}
+    .manifesto-card h3{font-size:2.1rem;line-height:1.02;letter-spacing:-.04em;margin:0;max-width:540px}
+    .manifesto-card .big{
+      font-size:clamp(3.6rem,7vw,6.8rem);
+      line-height:.9;
+      letter-spacing:-.065em;
+      font-weight:850;
+      max-width:10ch;
+      text-wrap:balance
+    }
+    .manifesto-card .caption{max-width:460px;color:#42463e;font-size:.92rem;margin:0}
+
+    .process{display:grid;grid-template-columns:.42fr .58fr;gap:4rem}
+    .process-intro{position:sticky;top:116px;height:max-content}
+    .process-list{border-top:1px solid rgba(255,255,255,.2)}
+    .step{
+      padding:1.5rem 0 2.25rem;border-bottom:1px solid rgba(255,255,255,.2);
+      display:grid;grid-template-columns:80px 1fr;gap:1.3rem
+    }
+    .step .n{font-size:2rem;color:var(--acid);font-family:Georgia,serif}
+    .step h3{font-size:1.65rem;margin:.2rem 0 .55rem;letter-spacing:-.03em}
+    .step p{color:rgba(255,255,255,.62);margin:0;max-width:600px}
+    .method-flow{margin-top:2rem;border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:1.15rem;display:flex;gap:.6rem;flex-wrap:wrap}
+    .method-flow span{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.5rem .7rem;font-size:.75rem}
+    .method-flow b{color:var(--acid);font-weight:700}
+
+    .compare{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:28px;overflow:hidden}
+    .compare-col{padding:2.25rem;min-height:380px}
+    .compare-col + .compare-col{border-left:1px solid var(--line);background:#fffdf6}
+    .compare .tag{display:inline-block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.4rem .56rem;border:1px solid var(--line);border-radius:999px;margin-bottom:2rem}
+    .compare h3{font-size:2rem;letter-spacing:-.04em}
+    .flowline{display:flex;flex-direction:column;gap:.65rem;margin-top:1.8rem}
+    .flowline div{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;border-bottom:1px solid var(--line)}
+    .flowline strong{font-size:.9rem}.flowline small{color:var(--muted)}
+    .compare-col.highlight{background:var(--acid)}
+    .compare-col.highlight .tag{border-color:rgba(17,20,17,.26)}
+
+    .goal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+    .goal{
+      border:1px solid var(--line);border-radius:18px;padding:1.35rem;min-height:210px;
+      display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s ease,background .2s ease
+    }
+    .goal:hover{transform:translateY(-5px);background:#fffdf6}
+    .goal .ico{font-size:1.4rem}.goal h3{font-size:1.18rem;margin:1.2rem 0 .45rem}
+    .goal p{font-size:.88rem;color:var(--muted);margin:0}
+
+    .proof-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:1rem}
+    .quote-stage{background:#fffdf6;border-radius:28px;padding:2.1rem;border:1px solid var(--line);min-height:460px;display:flex;flex-direction:column;justify-content:space-between}
+    .quote-stage .quote{font-family:Georgia,serif;font-size:clamp(2rem,4vw,4rem);line-height:1;letter-spacing:-.04em}
+    .demo-badge{align-self:flex-start;background:var(--ink);color:var(--white);border-radius:999px;padding:.42rem .62rem;font-size:.67rem;letter-spacing:.13em;text-transform:uppercase}
+    .case-stack{display:grid;gap:1rem}
+    .case{border:1px solid var(--line);border-radius:22px;padding:1.5rem;display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center}
+    .case strong{font-size:1.2rem}.case p{font-size:.86rem;color:var(--muted);margin:.3rem 0 0}
+    .case .metric{width:92px;height:92px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;text-align:center;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em}
+
+    .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:4rem;align-items:center}
+    .portrait{
+      min-height:560px;border-radius:32px;background:var(--paper-2);border:1px solid var(--line);
+      display:grid;place-items:center;position:relative;overflow:hidden
+    }
+    .portrait::before{content:"CM";position:absolute;font-size:18rem;line-height:1;font-weight:900;letter-spacing:-.12em;color:rgba(17,20,17,.06)}
+    .portrait-ring{width:270px;height:390px;border:1.5px solid var(--ink);border-radius:48% 48% 42% 42% / 36% 36% 64% 64%;position:relative}
+    .portrait-ring::before{content:"";position:absolute;width:115px;height:115px;border:1.5px solid var(--ink);border-radius:50%;left:50%;transform:translateX(-50%);top:52px;background:var(--paper-2)}
+    .portrait-ring::after{content:"SHOOTING CARLO";position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);font-size:.65rem;letter-spacing:.16em;white-space:nowrap}
+    .about-copy h2{font-size:clamp(3rem,5vw,5.5rem)}
+    .about-copy p{font-size:1.02rem;color:var(--muted);max-width:650px}
+    .cred{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-top:1.6rem}
+    .cred div{padding:.95rem;border:1px solid var(--line);border-radius:14px;font-size:.78rem}
+    .cred b{display:block;font-size:.9rem;margin-bottom:.2rem}
+
+    .locations{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem}
+    .location{
+      min-height:300px;border-radius:22px;border:1px solid var(--line);padding:1.45rem;position:relative;overflow:hidden;
+      background:#fffdf6;display:flex;flex-direction:column;justify-content:space-between
+    }
+    .location::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;border:1px solid var(--line);right:-48px;bottom:-48px}
+    .location .num{font-family:Georgia,serif;font-size:2.5rem;color:var(--muted)}
+    .location h3{font-size:1.5rem;margin:0}.location p{font-size:.86rem;color:var(--muted);margin:.4rem 0 0}
+    .location .placeholder{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;opacity:.55}
+
+    .booking{display:grid;grid-template-columns:.9fr 1.1fr;gap:4rem;align-items:start}
+    .booking-copy h2{font-size:clamp(3rem,5vw,5.5rem)}
+    .booking-copy .micro{font-size:.8rem;color:rgba(255,255,255,.55);max-width:520px;margin-top:1.4rem}
+    .form-card{background:var(--paper);color:var(--ink);border-radius:26px;padding:1.6rem}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    .field{display:flex;flex-direction:column;gap:.36rem}
+    .field.full{grid-column:1/-1}
+    label{font-size:.7rem;text-transform:uppercase;letter-spacing:.11em;color:var(--muted)}
+    input,select,textarea{
+      width:100%;background:#fbfaf4;border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;outline:none
+    }
+    input:focus,select:focus,textarea:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(17,20,17,.08)}
+    textarea{min-height:105px;resize:vertical}
+    .form-card .btn{margin-top:1rem;width:100%;border:0}
+    .form-note{font-size:.7rem;color:var(--muted);margin:.75rem 0 0}
+    #formMessage{display:none;margin-top:.9rem;padding:.85rem;border-radius:12px;background:rgba(243,107,43,.20);font-size:.85rem}
+
+    .faq{border-top:1px solid var(--line)}
+    .faq-item{border-bottom:1px solid var(--line)}
+    .faq-q{width:100%;display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:1.25rem 0;background:none;border:0;text-align:left;font-weight:750;cursor:pointer}
+    .faq-q span:last-child{font-size:1.4rem;font-weight:400}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted)}
+    .faq-a p{padding:0 0 1.25rem;margin:0;max-width:840px}
+    .faq-item.open .faq-a{max-height:250px}
+
+    footer{padding:36px 0 48px;background:var(--dark);color:var(--white);border-top:1px solid rgba(255,255,255,.12)}
+    .footer-grid{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end}
+    .footer-brand{font-size:clamp(2.8rem,6vw,6rem);font-weight:850;letter-spacing:-.06em;line-height:.86}
+    .footer-brand em{font-family:Georgia,serif;font-weight:400}
+    .footer-meta{text-align:right;font-size:.76rem;color:rgba(255,255,255,.58)}
+    .footer-meta a{display:block;margin:.35rem 0;color:var(--white)}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease, transform .65s ease}
+    .reveal.in{opacity:1;transform:none}
+
+    @media (max-width: 820px){
+      .hero-actions .btn{min-height:46px}
+      .manifesto-card .big{font-size:clamp(3.4rem,9vw,5.6rem)}
+      .case{grid-template-columns:1fr}
+      .case .metric{width:78px;height:78px}
+    }
+    @media (max-width: 980px){
+      .hero-grid,.process,.proof-grid,.about-grid,.booking{grid-template-columns:1fr}
+      .hero-grid{gap:2rem}
+      .scan-card{min-height:500px}
+      .section-head{gap:.8rem}
+      .process-intro{position:relative;top:auto}
+      .goal-grid{grid-template-columns:repeat(2,1fr)}
+      .locations{grid-template-columns:1fr 1fr}
+      .nav-links{display:none}
+      .menu{display:block}
+      .nav.mobile-open .nav-links{
+        display:flex;position:absolute;top:74px;left:0;right:0;background:var(--paper);padding:1rem 20px 1.4rem;
+        border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start
+      }
+      .nav.mobile-open .nav-links .nav-cta{width:100%}
+      .about-grid{gap:2rem}
+    }
+    @media (max-width: 680px){
+      .wrap{width:min(calc(100% - 24px), var(--max))}
+      .nav-in{height:64px}
+      .hero{padding:42px 0 56px}
+      h1{font-size:clamp(3.4rem,18vw,5.4rem)}
+      h1 .line2{padding-left:0}
+      .hero-copy{font-size:1rem}
+      .hero-actions{flex-direction:column}
+      .hero-actions .btn{width:100%}
+      .hero-meta{grid-template-columns:1fr 1fr;gap:.7rem}
+      .hero-meta div:last-child{grid-column:1/-1}
+      .scan-card{min-height:455px;border-radius:24px}
+      .scan-top{top:18px;left:18px;right:18px;font-size:.64rem}
+      .scan-bottom{left:18px;right:18px;bottom:18px}
+      .scan-bottom strong{font-size:1.05rem}
+      .section{padding:72px 0}
+      .manifesto{grid-template-columns:1fr}
+      .manifesto-card{min-height:auto;padding:1.5rem}
+      .manifesto-card .big{font-size:clamp(3rem,15vw,4.8rem);max-width:100%}
+      .manifesto-card h3{font-size:1.8rem}
+      .compare{grid-template-columns:1fr}
+      .compare-col{padding:1.5rem}
+      .compare-col + .compare-col{border-left:0;border-top:1px solid var(--line)}
+      .goal-grid,.locations,.cred,.form-grid{grid-template-columns:1fr}
+      .goal,.location,.case,.quote-stage,.form-card{min-height:auto}
+      .field.full{grid-column:auto}
+      .about-grid{gap:1.5rem}
+      .portrait{min-height:430px}
+      .portrait::before{font-size:11rem}
+      .portrait-ring{transform:scale(.78)}
+      .step{grid-template-columns:50px 1fr}
+      .step h3{font-size:1.35rem}
+      .booking{gap:1.5rem}
+      .form-card{padding:1.2rem}
+      .footer-grid{grid-template-columns:1fr}
+      .footer-meta{text-align:left}
+    }
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+      .reveal{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body>
+<nav class="nav" id="nav">
+    <div class="wrap nav-in">
+      <a href="#top" class="brand" aria-label="Carlo Mancuso">
+        <span class="brand-mark">CM</span>
+        <span>Carlo Mancuso</span>
+      </a>
+      <div class="nav-links">
+        <a href="#metodo">Metodo</a>
+        <a href="#perchi">Per chi</a>
+        <a href="#risultati">Risultati</a>
+        <a href="#sedi">Sedi</a>
+        <a href="#carlo">Carlo</a>
+        <a class="btn btn-primary nav-cta" href="#prenota">Prima valutazione <span class="arrow">↗</span></a>
+      </div>
+      <button class="menu" id="menuBtn" aria-label="Apri menu">☰</button>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+<h1>Prima ti <em>osservo.</em><span class="line2">Poi ti alleno.</span></h1>
+          <p class="hero-copy">
+            Un percorso di personal training costruito su come ti muovi, su ciò che vuoi ottenere e sul punto da cui parti. Ogni esercizio ha un motivo, ogni progressione segue il tuo percorso.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#prenota">Prenota una prima prova <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="#metodo">Scopri il metodo</a>
+          </div>
+          <div class="hero-meta">
+            <div><strong>1:1</strong><span>attenzione individuale</span></div>
+            <div><strong>Valuta → allena</strong><span>il percorso parte da te</span></div>
+            <div><strong>Progressivo</strong><span>si misura, si adatta, evolve</span></div>
+          </div>
+        </div>
+
+        <div class="scan-card reveal photo-slider" aria-label="Allenamento con Carlo Mancuso">
+          <div class="slide active" style="background-image:linear-gradient(180deg,rgba(12,14,12,.06),rgba(12,14,12,.62)),url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1400&q=85');"></div>
+          <div class="slide" style="background-image:linear-gradient(180deg,rgba(12,14,12,.05),rgba(12,14,12,.62)),url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1400&q=85');"></div>
+          <div class="slide" style="background-image:linear-gradient(180deg,rgba(12,14,12,.05),rgba(12,14,12,.62)),url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1400&q=85');"></div>
+          <div class="scan-top"><span>Carlo Mancuso</span><span>Personal Training</span></div>
+          <div class="scan-bottom">
+            <div><strong>Allenamento costruito su di te.</strong><small>Movimento, forza e progressione.</small></div>
+            <div class="slider-dots" aria-label="Controlli slider">
+              <button class="slider-dot active" type="button" aria-label="Foto 1"></button>
+              <button class="slider-dot" type="button" aria-label="Foto 2"></button>
+              <button class="slider-dot" type="button" aria-label="Foto 3"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" id="metodo">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Non una scheda.<br><em>Un criterio.</em></h2>
+            <p class="lede">
+              L’unicità non sta nel “fare posturale” e nemmeno nel “fare pesi”. Sta nel collegare le due cose:
+              capire il punto di partenza, scegliere ciò che serve e far progredire il corpo senza perdere qualità di movimento.
+            </p>
+          </div>
+        </div>
+        <div class="manifesto">
+          <article class="manifesto-card acid reveal">
+            <div class="eyebrow">Principio 01</div>
+            <div>
+              <div class="big">Niente formule preconfezionate</div>
+              <p class="caption">Prima vengono la tua storia, il modo in cui ti muovi e l’obiettivo che vuoi raggiungere. Il programma nasce da lì.</p>
+            </div>
+          </article>
+          <article class="manifesto-card reveal">
+            <div class="eyebrow">Principio 02</div>
+            <div>
+              <h3>La postura è una parte del quadro. Quello che conta è capire come il tuo corpo si muove e come può lavorare meglio.</h3>
+              <p class="caption">L’obiettivo è allenarti con più consapevolezza, senza trasformare ogni movimento in un problema da correggere.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="wrap process">
+        <div class="process-intro reveal">
+          <h2>Valuto.<br>Costruisco.<br><em>Adatto.</em></h2>
+          <p class="lede">Il percorso parte dall’ascolto, passa dalla valutazione e si costruisce nel tempo attraverso allenamento e verifiche.</p>
+          <div class="method-flow">
+            <span><b>01</b> ascolto</span><span>→</span><span><b>02</b> valutazione</span><span>→</span>
+            <span><b>03</b> allenamento</span><span>→</span><span><b>04</b> verifica</span>
+          </div>
+        </div>
+        <div class="process-list">
+          <article class="step reveal">
+            <div class="n">01</div><div><h3>Partiamo da te</h3><p>Obiettivi, abitudini, esperienza di allenamento, eventuali limitazioni note e ciò che oggi ti impedisce di essere costante.</p></div>
+          </article>
+          <article class="step reveal">
+            <div class="n">02</div><div><h3>Osservo come ti muovi</h3><p>Mobilità, controllo motorio, esecuzione dei pattern di base e qualità del movimento diventano il contesto con cui scegliere esercizi e progressioni.</p></div>
+          </article>
+          <article class="step reveal">
+            <div class="n">03</div><div><h3>Costruiamo forza, non compensi</h3><p>L’allenamento resta allenamento: forza, tono, capacità fisiche e performance. Ma esercizi, carichi e varianti vengono scelti in funzione della persona.</p></div>
+          </article>
+          <article class="step reveal">
+            <div class="n">04</div><div><h3>Misuriamo e aggiorniamo</h3><p>I progressi non si affidano alle sensazioni: il percorso viene verificato nel tempo e modificato quando il corpo e gli obiettivi cambiano.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Il punto non è fare <em>di più.</em><br>È fare ciò che serve.</h2>
+          </div>
+        </div>
+        <div class="compare reveal">
+          <div class="compare-col">
+            <span class="tag">Approccio standard</span>
+            <h3>Programma → persona</h3>
+            <div class="flowline">
+              <div><strong>Scheda predefinita</strong><small>stesso punto di partenza</small></div>
+              <div><strong>Esecuzione</strong><small>correzione “sul momento”</small></div>
+              <div><strong>Progressione</strong><small>più peso / più volume</small></div>
+              <div><strong>Risultato</strong><small>dipende dall’adattamento al programma</small></div>
+            </div>
+          </div>
+          <div class="compare-col highlight">
+            <span class="tag">Metodo Carlo</span>
+            <h3>Persona → programma</h3>
+            <div class="flowline">
+              <div><strong>Valutazione iniziale</strong><small>capire da dove parti</small></div>
+              <div><strong>Scelta degli esercizi</strong><small>coerente con come ti muovi</small></div>
+              <div><strong>Progressione</strong><small>carico + qualità + controllo</small></div>
+              <div><strong>Verifica</strong><small>il programma cambia con te</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="perchi">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Obiettivi diversi.<br><em>Stesso principio:</em> partire bene.</h2>
+            <p class="lede">Non serve avere un problema specifico per iniziare. Il lavoro è adatto anche a chi vuole semplicemente allenarsi meglio, con più controllo e con un percorso costruito davvero sulla propria persona.</p>
+          </div>
+        </div>
+        <div class="goal-grid">
+          <article class="goal reveal"><div class="ico">↗</div><div><h3>Forza & tono</h3><p>Vuoi diventare più forte e costruire un corpo più allenato con un lavoro realmente personalizzato.</p></div></article>
+          <article class="goal reveal"><div class="ico">◎</div><div><h3>Muoversi meglio</h3><p>Ti senti rigido, poco coordinato o vuoi migliorare la qualità dei movimenti durante l’allenamento.</p></div></article>
+          <article class="goal reveal"><div class="ico">↺</div><div><h3>Ripartire</h3><p>Stai tornando ad allenarti dopo una lunga pausa e vuoi farlo con gradualità e supervisione.</p></div></article>
+          <article class="goal reveal"><div class="ico">△</div><div><h3>Performance</h3><p>Ti alleni già e vuoi rendere il lavoro più preciso, progressivo e coerente con i tuoi obiettivi.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="risultati">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><h2>Il metodo si racconta.<br>I clienti lo <em>confermano.</em></h2></div>
+        </div>
+        <div class="proof-grid">
+          <article class="quote-stage reveal">
+            <span class="demo-badge">Contenuto demo — sostituire con recensione reale</span>
+            <div class="quote">“Qui inseriremo una recensione che racconti cosa è cambiato davvero: non solo il risultato estetico, ma il modo di allenarsi.”</div>
+            <div><strong>Nome cliente</strong><br><span class="muted">Percorso / durata / obiettivo</span></div>
+          </article>
+          <div class="case-stack">
+            <article class="case reveal"><div><div class="eyebrow">Case study 01</div><strong>Prima → dopo</strong><p>Spazio per una storia reale con obiettivo, percorso e risultato misurabile.</p></div><div class="metric">dato<br>reale</div></article>
+            <article class="case reveal"><div><div class="eyebrow">Case study 02</div><strong>Movimento → performance</strong><p>Un esempio in cui il lavoro sulla qualità del movimento ha sostenuto il percorso di allenamento.</p></div><div class="metric">dato<br>reale</div></article>
+            <article class="case reveal"><div><div class="eyebrow">Case study 03</div><strong>Costanza → risultato</strong><p>Una storia utile a far capire il valore del coaching e della progressione nel tempo.</p></div><div class="metric">dato<br>reale</div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="carlo">
+      <div class="wrap about-grid">
+        <div class="portrait reveal" aria-label="Segnaposto per servizio fotografico di Carlo Mancuso">
+          <div class="portrait-ring"></div>
+        </div>
+        <div class="about-copy reveal">
+          <h2>Un trainer che guarda <em>prima</em> di prescrivere.</h2>
+          <p>
+            Carlo unisce esperienza nell’allenamento e studio della postura per costruire percorsi in cui tecnica, controllo e progressione lavorano insieme.
+          </p>
+          <p>
+            Il suo approccio nasce dall’idea che un buon allenamento non debba limitarsi a far eseguire esercizi, ma debba partire dall’osservazione e dalla comprensione della persona.
+          </p>
+          <div class="cred">
+            <div><b>[Titolo / qualifica]</b>Da inserire e verificare</div>
+            <div><b>[Specializzazione posturologia]</b>Ente + anno da inserire</div>
+            <div><b>[Anni di esperienza]</b>Dato reale da inserire</div>
+            <div><b>[Certificazioni]</b>Solo quelle effettivamente possedute</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sedi">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Ci alleniamo dove puoi dare <em>continuità.</em></h2>
+            <p class="lede">Puoi scegliere la sede più comoda per il tuo percorso. Nella versione definitiva troverai indirizzi, disponibilità e tutte le informazioni utili per organizzare la prima sessione.</p>
+          </div>
+        </div>
+        <div class="locations">
+          <article class="location reveal"><div><span class="placeholder">Placeholder — da completare</span><div class="num">01</div></div><div><h3>Sede principale</h3><p>[Nome struttura] · [Città / indirizzo]</p></div></article>
+          <article class="location reveal"><div><span class="placeholder">Placeholder — da completare</span><div class="num">02</div></div><div><h3>Seconda sede</h3><p>[Nome struttura] · [Città / indirizzo]</p></div></article>
+          <article class="location reveal"><div><span class="placeholder">Opzione da confermare</span><div class="num">03</div></div><div><h3>Altra modalità</h3><p>[Outdoor / domicilio / online, solo se realmente disponibile]</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="prenota">
+      <div class="wrap booking">
+        <div class="booking-copy reveal">
+          <h2>Prima di allenarti, <em>parliamone.</em></h2>
+          <p class="lede">Una call breve o una prima sessione serve a capire obiettivo, punto di partenza e compatibilità del percorso. Nessun programma standard prima di conoscerti.</p>
+          <p class="micro">Nota professionale: la valutazione funzionale/posturale proposta nel contesto dell’allenamento non sostituisce diagnosi, visite o trattamenti sanitari. In presenza di dolore, trauma o patologie è opportuno rivolgersi ai professionisti sanitari competenti.</p>
+        </div>
+        <form class="form-card reveal" id="leadForm">
+          <div class="form-grid">
+            <div class="field"><label for="nome">Nome</label><input id="nome" name="nome" required placeholder="Il tuo nome"></div>
+            <div class="field"><label for="telefono">Telefono</label><input id="telefono" name="telefono" required placeholder="+39 ..."></div>
+            <div class="field full"><label for="obiettivo">Qual è il tuo obiettivo?</label>
+              <select id="obiettivo" name="obiettivo">
+                <option>Forza e tono</option><option>Muovermi meglio</option><option>Riprendere ad allenarmi</option><option>Performance</option><option>Altro</option>
+              </select>
+            </div>
+            <div class="field full"><label for="sede">Dove preferisci allenarti?</label>
+              <select id="sede" name="sede"><option>Sede principale</option><option>Seconda sede</option><option>Da decidere insieme</option></select>
+            </div>
+            <div class="field full"><label for="messaggio">Cosa vuoi raccontarmi prima della call?</label><textarea id="messaggio" name="messaggio" placeholder="Esperienza, disponibilità, cosa vuoi migliorare..."></textarea></div>
+          </div>
+          <button class="btn btn-primary" type="submit">Richiedi la prima valutazione <span class="arrow">↗</span></button>
+          <p class="form-note">Modulo demo: nella versione definitiva verrà collegato a WhatsApp, Calendly, email o CRM.</p>
+          <div id="formMessage">Demo ricevuta ✓ — nella versione reale qui parte la richiesta di prenotazione.</div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><h2>Le domande più comuni <em>prima</em> di iniziare.</h2></div>
+        </div>
+        <div class="faq">
+          <div class="faq-item reveal"><button class="faq-q"><span>Come funziona la prima sessione?</span><span>+</span></button><div class="faq-a"><p>Si parte con un colloquio e una valutazione legata al movimento e all’allenamento. In base alle informazioni raccolte viene definita la direzione del percorso.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-q"><span>Devo essere già allenato?</span><span>+</span></button><div class="faq-a"><p>No. Il principio del servizio è proprio partire dal livello reale della persona e costruire una progressione sostenibile.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-q"><span>Quante volte a settimana devo allenarmi?</span><span>+</span></button><div class="faq-a"><p>La frequenza dipende da obiettivo, disponibilità, esperienza e recupero. È una delle scelte da definire dopo il primo incontro, non una regola uguale per tutti.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-q"><span>Il percorso è adatto se ho dolore o una patologia?</span><span>+</span></button><div class="faq-a"><p>Il personal training non sostituisce una valutazione sanitaria. In caso di dolore, trauma o patologia serve il confronto con il professionista sanitario competente; l’allenamento può poi essere organizzato nel rispetto delle indicazioni ricevute, quando appropriato.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-q"><span>Quanto costa?</span><span>+</span></button><div class="faq-a"><p>Per la demo il prezzo non è indicato. La versione finale potrà mostrare i pacchetti oppure mantenere un modello “prima valutazione → proposta”, in base al posizionamento commerciale scelto.</p></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div class="footer-brand">Carlo<br><em>Mancuso.</em></div>
+      <div class="footer-meta">
+        <a href="#prenota">Prenota la prima prova ↗</a>
+        <span>[Telefono] · [Email] · [Instagram]</span><br>
+        <span>Demo strategica — dati e credenziali da validare prima della pubblicazione</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 12));
+
+    const menuBtn = document.getElementById('menuBtn');
+    menuBtn.addEventListener('click', () => nav.classList.toggle('mobile-open'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => nav.classList.remove('mobile-open')));
+
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        item.classList.toggle('open');
+        btn.lastElementChild.textContent = item.classList.contains('open') ? '−' : '+';
+      });
+    });
+
+    const form = document.getElementById('leadForm');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      document.getElementById('formMessage').style.display = 'block';
+    });
+
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('in'); });
+    }, { threshold: .08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    const slides = [...document.querySelectorAll('.photo-slider .slide')];
+    const dots = [...document.querySelectorAll('.slider-dot')];
+    let slideIndex = 0;
+    let sliderTimer;
+    function showSlide(i){
+      slideIndex = (i + slides.length) % slides.length;
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === slideIndex));
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === slideIndex));
+    }
+    function startSlider(){ clearInterval(sliderTimer); sliderTimer = setInterval(() => showSlide(slideIndex + 1), 4500); }
+    dots.forEach((dot, idx) => dot.addEventListener('click', () => { showSlide(idx); startSlider(); }));
+    if(slides.length){ startSlider(); }
+
+  </script>
+</body>
+</html>
